@@ -54,7 +54,7 @@ export default function AppFunctional(props) {
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">Koordinatlar (2, 2)</h3>
+        <h3 id="coordinates">Koordinatlar {getXY(activeIndex)}</h3>
         <h3 id="steps">{`${stepNumber} kere ilerlediniz`}</h3>
       </div>
       <div id="grid">
