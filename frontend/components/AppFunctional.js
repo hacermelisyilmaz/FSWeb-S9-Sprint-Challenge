@@ -32,6 +32,8 @@ export default function AppFunctional(props) {
 
   function reset() {
     // Tüm stateleri başlangıç ​​değerlerine sıfırlamak için bu helperı kullanın.
+    setActiveIndex(0);
+    setStepNumber(0);
   }
 
   function sonrakiIndex(yon) {
