@@ -41,19 +41,19 @@ export default function AppFunctional(props) {
     // Gridin kenarına ulaşıldığında başka gidecek yer olmadığı için, şu anki indeksi değiştirmemeli.
     let flag = false;
 
-    if (yon === "sol") {
+    if (yon === "left") {
       getXY(activeIndex)[0] === 1
         ? (flag = true)
         : setActiveIndex(activeIndex - 1);
-    } else if (yon === "yukarı") {
+    } else if (yon === "up") {
       getXY(activeIndex)[1] === 1
         ? (flag = true)
         : setActiveIndex(activeIndex - 3);
-    } else if (yon === "sağ") {
+    } else if (yon === "right") {
       getXY(activeIndex)[0] === 3
         ? (flag = true)
         : setActiveIndex(activeIndex + 1);
-    } else if (yon === "aşağı") {
+    } else if (yon === "down") {
       getXY(activeIndex)[1] === 3
         ? (flag = true)
         : setActiveIndex(activeIndex + 3);
@@ -67,9 +67,10 @@ export default function AppFunctional(props) {
     // ve buna göre state i değiştirir.
   }
 
-  function onChange(evt) {
+  const clickHandler = (evt) => {
     // inputun değerini güncellemek için bunu kullanabilirsiniz
-  }
+    console.log(evt.target.id);
+  };
 
   function onSubmit(evt) {
     // payloadu POST etmek için bir submit handlera da ihtiyacınız var.
@@ -95,11 +96,21 @@ export default function AppFunctional(props) {
         <h3 id="message"></h3>
       </div>
       <div id="keypad">
-        <button id="left">SOL</button>
-        <button id="up">YUKARI</button>
-        <button id="right">SAĞ</button>
-        <button id="down">AŞAĞI</button>
-        <button id="reset">reset</button>
+        <button id="left" onClick={clickHandler}>
+          SOL
+        </button>
+        <button id="up" onClick={clickHandler}>
+          YUKARI
+        </button>
+        <button id="right" onClick={clickHandler}>
+          SAĞ
+        </button>
+        <button id="down" onClick={clickHandler}>
+          AŞAĞI
+        </button>
+        <button id="reset" onClick={reset}>
+          reset
+        </button>
       </div>
       <form>
         <input id="email" type="email" placeholder="email girin"></input>
