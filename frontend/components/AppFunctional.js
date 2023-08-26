@@ -32,8 +32,8 @@ export default function AppFunctional(props) {
 
   function reset() {
     // Tüm stateleri başlangıç ​​değerlerine sıfırlamak için bu helperı kullanın.
-    setActiveIndex(0);
-    setStepNumber(0);
+    setActiveIndex(initialIndex);
+    setStepNumber(initialSteps);
   }
 
   function sonrakiIndex(yon) {
@@ -59,17 +59,12 @@ export default function AppFunctional(props) {
         : setActiveIndex(activeIndex + 3);
     }
 
-    flag || setStepNumber(stepNumber++);
-  }
-
-  function ilerle(evt) {
-    // Bu event handler, "B" için yeni bir dizin elde etmek üzere yukarıdaki yardımcıyı kullanabilir,
-    // ve buna göre state i değiştirir.
+    flag || setStepNumber(stepNumber + 1);
   }
 
   const clickHandler = (evt) => {
     // inputun değerini güncellemek için bunu kullanabilirsiniz
-    console.log(evt.target.id);
+    sonrakiIndex(evt.target.id);
   };
 
   function onSubmit(evt) {
