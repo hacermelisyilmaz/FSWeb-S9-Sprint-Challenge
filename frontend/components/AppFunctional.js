@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 // önerilen başlangıç stateleri
 const initialMessage = "";
-const initialEmail = "";
 const initialSteps = 0;
 const initialIndex = 4; //  "B" nin bulunduğu indexi
 
@@ -11,6 +11,7 @@ export default function AppFunctional(props) {
   // Bunları silip kendi mantığınızla sıfırdan geliştirebilirsiniz.
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [stepNumber, setStepNumber] = useState(initialSteps);
+  const [message, setMessage] = useState(initialMessage);
 
   function getXY(aActiveIndex) {
     // Koordinatları izlemek için bir state e sahip olmak gerekli değildir.
@@ -69,6 +70,23 @@ export default function AppFunctional(props) {
 
   function onSubmit(evt) {
     // payloadu POST etmek için bir submit handlera da ihtiyacınız var.
+    evt.preventDefault();
+
+    const emailDOM = document.getElementById("email");
+
+    axios
+      .post("http://localhost:9000/api/result", {
+        email: emailDOM.value,
+        x: getXY(activeIndex)[0],
+        y: getXY(activeIndex)[1],
+        steps: stepNumber,
+      })
+      .then(function (response) {
+        setMessage(response.data.message);
+      })
+      .catch(function (error) {
+        console.error(error.message);
+      });
   }
 
   return (
@@ -88,7 +106,7 @@ export default function AppFunctional(props) {
         ))}
       </div>
       <div className="info">
-        <h3 id="message"></h3>
+        <h3 id="message">{message}</h3>
       </div>
       <div id="keypad">
         <button id="left" onClick={clickHandler}>
@@ -107,7 +125,7 @@ export default function AppFunctional(props) {
           reset
         </button>
       </div>
-      <form>
+      <form onSubmit={onSubmit}>
         <input id="email" type="email" placeholder="email girin"></input>
         <input id="submit" type="submit"></input>
       </form>
