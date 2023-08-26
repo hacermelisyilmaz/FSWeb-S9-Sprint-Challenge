@@ -43,21 +43,25 @@ export default function AppFunctional(props) {
     let flag = false;
 
     if (yon === "left") {
-      getXY(activeIndex)[0] === 1
-        ? (flag = true)
-        : setActiveIndex(activeIndex - 1);
+      if (getXY(activeIndex)[0] === 1) {
+        flag = true;
+        setMessage("Sola gidemezsiniz");
+      } else setActiveIndex(activeIndex - 1);
     } else if (yon === "up") {
-      getXY(activeIndex)[1] === 1
-        ? (flag = true)
-        : setActiveIndex(activeIndex - 3);
+      if (getXY(activeIndex)[1] === 1) {
+        flag = true;
+        setMessage("Yukarı gidemezsiniz");
+      } else setActiveIndex(activeIndex - 3);
     } else if (yon === "right") {
-      getXY(activeIndex)[0] === 3
-        ? (flag = true)
-        : setActiveIndex(activeIndex + 1);
+      if (getXY(activeIndex)[0] === 3) {
+        flag = true;
+        setMessage("Sağa gidemezsiniz");
+      } else setActiveIndex(activeIndex + 1);
     } else if (yon === "down") {
-      getXY(activeIndex)[1] === 3
-        ? (flag = true)
-        : setActiveIndex(activeIndex + 3);
+      if (getXY(activeIndex)[1] === 3) {
+        flag = true;
+        setMessage("Aşağı gidemezsiniz");
+      } else setActiveIndex(activeIndex + 3);
     }
 
     flag || setStepNumber(stepNumber + 1);
