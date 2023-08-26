@@ -12,9 +12,14 @@ export default function AppFunctional(props) {
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [stepNumber, setStepNumber] = useState(initialSteps);
 
-  function getXY() {
+  function getXY(aActiveIndex) {
     // Koordinatları izlemek için bir state e sahip olmak gerekli değildir.
     // Bunları hesaplayabilmek için "B" nin hangi indexte olduğunu bilmek yeterlidir.
+    const sqNumber = aActiveIndex + 1;
+    let X = sqNumber % 3 ? sqNumber % 3 : 3;
+    let Y = Math.ceil(sqNumber / 3);
+
+    return `(${X}, ${Y})`;
   }
 
   function getXYMesaj() {
