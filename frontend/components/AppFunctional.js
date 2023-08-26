@@ -38,8 +38,18 @@ export default function AppFunctional(props) {
 
   function sonrakiIndex(yon) {
     // Bu helper bir yön ("sol", "yukarı", vb.) alır ve "B" nin bir sonraki indeksinin ne olduğunu hesaplar.
-    // Gridin kenarına ulaşıldığında başka gidecek yer olmadığı için,
-    // şu anki indeksi değiştirmemeli.
+    // Gridin kenarına ulaşıldığında başka gidecek yer olmadığı için, şu anki indeksi değiştirmemeli.
+    if (yon === "sol") {
+      getXY(activeIndex)[0] === 1 || setActiveIndex(activeIndex - 1);
+    } else if (yon === "yukarı") {
+      getXY(activeIndex)[1] === 1 || setActiveIndex(activeIndex - 3);
+    } else if (yon === "sağ") {
+      getXY(activeIndex)[0] === 3 || setActiveIndex(activeIndex + 1);
+    } else if (yon === "aşağı") {
+      getXY(activeIndex)[1] === 3 || setActiveIndex(activeIndex + 3);
+    }
+
+    setActiveIndex(newIndex);
   }
 
   function ilerle(evt) {
