@@ -19,7 +19,7 @@ export default function AppFunctional(props) {
     let X = sqNumber % 3 ? sqNumber % 3 : 3;
     let Y = Math.ceil(sqNumber / 3);
 
-    return `(${X}, ${Y})`;
+    return [X, Y];
   }
 
   function getXYMesaj() {
@@ -54,7 +54,9 @@ export default function AppFunctional(props) {
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">Koordinatlar {getXY(activeIndex)}</h3>
+        <h3 id="coordinates">
+          Koordinatlar ({getXY(activeIndex)[0]}, {getXY(activeIndex)[1]})
+        </h3>
         <h3 id="steps">{`${stepNumber} kere ilerlediniz`}</h3>
       </div>
       <div id="grid">
