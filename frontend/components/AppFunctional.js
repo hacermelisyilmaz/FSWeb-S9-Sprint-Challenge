@@ -3,6 +3,7 @@ import axios from "axios";
 
 // önerilen başlangıç stateleri
 const initialMessage = "";
+const initialEmail = "";
 const initialSteps = 0;
 const initialIndex = 4; //  "B" nin bulunduğu indexi
 
@@ -12,6 +13,7 @@ export default function AppFunctional(props) {
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [stepNumber, setStepNumber] = useState(initialSteps);
   const [message, setMessage] = useState(initialMessage);
+  const [email, setEmail] = useState(initialEmail);
 
   function getXY(aActiveIndex) {
     // Koordinatları izlemek için bir state e sahip olmak gerekli değildir.
@@ -35,6 +37,8 @@ export default function AppFunctional(props) {
     // Tüm stateleri başlangıç ​​değerlerine sıfırlamak için bu helperı kullanın.
     setActiveIndex(initialIndex);
     setStepNumber(initialSteps);
+    setEmail(initialEmail);
+    setMessage(initialMessage);
   }
 
   function sonrakiIndex(yon) {
@@ -50,7 +54,7 @@ export default function AppFunctional(props) {
     } else if (yon === "up") {
       if (getXY(activeIndex)[1] === 1) {
         flag = true;
-        setMessage("Yukarı gidemezsiniz");
+        setMessage("Yukarıya gidemezsiniz");
       } else setActiveIndex(activeIndex - 3);
     } else if (yon === "right") {
       if (getXY(activeIndex)[0] === 3) {
@@ -60,27 +64,31 @@ export default function AppFunctional(props) {
     } else if (yon === "down") {
       if (getXY(activeIndex)[1] === 3) {
         flag = true;
-        setMessage("Aşağı gidemezsiniz");
+        setMessage("Aşağıya gidemezsiniz");
       } else setActiveIndex(activeIndex + 3);
     }
 
     flag || setStepNumber(stepNumber + 1);
   }
 
-  const clickHandler = (evt) => {
+  function clickHandler(evt) {
     // inputun değerini güncellemek için bunu kullanabilirsiniz
     sonrakiIndex(evt.target.id);
-  };
+  }
+
+  function changeHandler(evt) {
+    const emailDOM = document.getElementById("email");
+    setEmail(emailDOM.value);
+  }
 
   function onSubmit(evt) {
     // payloadu POST etmek için bir submit handlera da ihtiyacınız var.
     evt.preventDefault();
-
-    const emailDOM = document.getElementById("email");
+    setEmail(initialEmail);
 
     axios
       .post("http://localhost:9000/api/result", {
-        email: emailDOM.value,
+        email: email,
         x: getXY(activeIndex)[0],
         y: getXY(activeIndex)[1],
         steps: stepNumber,
@@ -89,7 +97,7 @@ export default function AppFunctional(props) {
         setMessage(response.data.message);
       })
       .catch(function (error) {
-        console.error(error.message);
+        setMessage(error.response.data.message);
       });
   }
 
@@ -130,7 +138,13 @@ export default function AppFunctional(props) {
         </button>
       </div>
       <form onSubmit={onSubmit}>
-        <input id="email" type="email" placeholder="email girin"></input>
+        <input
+          id="email"
+          type="email"
+          placeholder="email girin"
+          onChange={changeHandler}
+          value={email}
+        ></input>
         <input id="submit" type="submit"></input>
       </form>
     </div>
