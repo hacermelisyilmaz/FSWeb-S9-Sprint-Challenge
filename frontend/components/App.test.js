@@ -8,11 +8,13 @@ describe("AppFunctional", () => {
     render(<AppFunctional />);
   });
 
-  test("info div has the right headings", () => {
+  test("info div has the coordination heading", () => {
     const coorInfo = screen.getByTestId(/coordinates-info/i);
     expect(coorInfo).toBeInTheDocument();
     expect(coorInfo).toHaveTextContent(/Koordinatlar /i);
+  });
 
+  test("info div has the steps heading", () => {
     const stepsInfo = screen.getByTestId(/steps-info/i);
     expect(stepsInfo).toBeInTheDocument();
     expect(stepsInfo).toHaveTextContent(/ kere ilerlediniz/i);
