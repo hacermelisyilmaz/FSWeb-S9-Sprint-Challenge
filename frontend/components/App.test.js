@@ -1,4 +1,8 @@
-// Write your tests here
-test('sanity', () => {
-  expect(true).toBe(false)
-})
+import { render } from "@testing-library/react";
+import AppFunctional from "./AppFunctional";
+
+describe("AppFunctional", () => {
+  beforeAll(() => {
+    render(<AppFunctional />);
+  });
+});
