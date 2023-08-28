@@ -104,8 +104,13 @@ export default function AppFunctional(props) {
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">{getXYMesaj(getXY, activeIndex)}</h3>
-        <h3 id="steps">{`${stepNumber} kere ilerlediniz`}</h3>
+        <h3 id="coordinates" data-testid="coordinates-info">
+          {getXYMesaj(getXY, activeIndex)}
+        </h3>
+        <h3
+          id="steps"
+          data-testid="steps-info"
+        >{`${stepNumber} kere ilerlediniz`}</h3>
       </div>
       <div id="grid">
         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((idx) => (
@@ -121,19 +126,19 @@ export default function AppFunctional(props) {
         <h3 id="message">{message}</h3>
       </div>
       <div id="keypad">
-        <button id="left" onClick={clickHandler}>
+        <button id="left" onClick={clickHandler} data-testid="button-left">
           SOL
         </button>
-        <button id="up" onClick={clickHandler}>
+        <button id="up" onClick={clickHandler} data-testid="button-up">
           YUKARI
         </button>
-        <button id="right" onClick={clickHandler}>
+        <button id="right" onClick={clickHandler} data-testid="button-right">
           SAĞ
         </button>
-        <button id="down" onClick={clickHandler}>
+        <button id="down" onClick={clickHandler} data-testid="button-down">
           AŞAĞI
         </button>
-        <button id="reset" onClick={reset}>
+        <button id="reset" onClick={reset} data-testid="button-reset">
           reset
         </button>
       </div>
@@ -144,6 +149,7 @@ export default function AppFunctional(props) {
           placeholder="email girin"
           onChange={changeHandler}
           value={email}
+          data-testid="email-input"
         ></input>
         <input id="submit" type="submit"></input>
       </form>
