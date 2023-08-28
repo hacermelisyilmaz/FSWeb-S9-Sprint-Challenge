@@ -1,7 +1,8 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { getByDisplayValue, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import AppFunctional from "./AppFunctional.js";
+import userEvent from "@testing-library/user-event";
 
 describe("AppFunctional", () => {
   beforeEach(() => {
@@ -35,5 +36,11 @@ describe("AppFunctional", () => {
 
     const resetButton = screen.getByTestId("button-reset");
     expect(resetButton).toHaveTextContent(/reset/i);
+  });
+
+  test("Email girilince value değişiyor", () => {
+    const emailInput = screen.getByTestId("email-input");
+    userEvent.type(emailInput, "xxxx");
+    expect(getByDisplayValue("xxxx")).toBeInTheDocument();
   });
 });
